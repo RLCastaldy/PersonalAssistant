@@ -27,4 +27,18 @@ warmStrategyCache({
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
-registerRoute();
+workbox.routing.registerRoute(
+  /.*\.(js|css|png|jpg|jpeg|gif)/,
+  new workbox.strategies.CacheFirst({
+    cacheName: 'assets-cache',
+    plugins: [
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200],
+      }),
+      new workbox.expiration.Plugin({
+        maxEntries: 100,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+      }),
+    ],
+  })
+);
