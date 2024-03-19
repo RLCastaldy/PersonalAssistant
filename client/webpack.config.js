@@ -8,8 +8,8 @@ module.exports = () => {
   return {
     mode: 'development',
     entry: {
-      main: '../src/js/index.js',
-      install: '../src/js/install.js'
+      main: path.resolve(__dirname, 'src/js/index.js'),
+      install: path.resolve(__dirname, 'src/js/install.js')
     },
     output: {
       filename: '[name].bundle.js',
@@ -21,16 +21,13 @@ module.exports = () => {
         template: './index.html',
         title: 'TODOs List'
       }),
-      new WebpackPwaManifest({
-
-      }),
+      new WebpackPwaManifest({}),
       new MiniCssExtractPlugin(),
       new InjectManifest({
         swSrc: './src-sw.js',
-            swDest: 'src-sw.js',
+        swDest: 'src-sw.js',
       }),
     ],
-
     module: {
       rules: [
         {
