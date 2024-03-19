@@ -42,3 +42,6 @@ workbox.routing.registerRoute(
     ],
   })
 );
+
+// Add offlineFallback
+offlineFallback();
